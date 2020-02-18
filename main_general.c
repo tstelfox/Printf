@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 19:45:27 by limartin       #+#    #+#                */
-/*   Updated: 2020/02/12 23:58:46 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/18 17:21:09 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		main(void)
 	int broken;
 	int	bonus;
 	
+	int				val1 = 2147483645;
 	char			c = 'a';
 	char			*s = "stringalingadingdong";
 	int				di = 42;
@@ -1256,6 +1257,31 @@ int		main(void)
 
 
 	ft_printf(" (%d)\n", ft_printf("My compliments in hexadecimal: %X %X %X", 4011, 49374, 47806));	
+
+	printf("\n------------------------------------------------------------------------------------------------\n\n");
+
+	printf(" (%d)\n", printf("I LIKE BIG DIGITS AND I CANNOT LIE"));
+	ft_printf(" (%d)\n", ft_printf("I LIKE BIG DIGITS AND I CANNOT LIE"));
+	printf("\n");
+
+
+	printf(" (%d)\n", printf("Sometimes it be like that: -018.17i |%-018.17d|", val1));
+	ft_printf(" (%d)\n", ft_printf("Sometimes it be like that: -018.17i |%-018.17d|", val1));
+	printf(" (%i)\n", printf("Sometimes it be like that: -018.20i |%-018.20d|", val1));
+	ft_printf(" (%i)\n", ft_printf("Sometimes it be like that: -018.20i |%-018.20d|", val1));
+	printf("\n");
+
+	printf(" (%d)\n", printf("Sometimes it be like that: -18.17i |%-18.17d|", val1));
+	ft_printf(" (%d)\n", ft_printf("Sometimes it be like that: -18.17i |%-18.17d|", val1));
+	printf(" (%i)\n", printf("Sometimes it be like that: -18.20i |%-18.20d|", val1));
+	ft_printf(" (%i)\n", ft_printf("Sometimes it be like that: -18.20i |%-18.20d|", val1));
+	printf("\n");
+
+	printf(" (%d)\n", printf("Sometimes it be like that: 18.17i |%18.17d|", val1));
+	ft_printf(" (%d)\n", ft_printf("Sometimes it be like that: 18.17i |%18.17d|", val1));
+	printf(" (%i)\n", printf("Sometimes it be like that: 18.20i |%18.20d|", val1));
+	ft_printf(" (%i)\n", ft_printf("Sometimes it be like that: 18.20i |%18.20d|", val1));
+	printf("\n");
 
 
 

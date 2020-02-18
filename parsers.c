@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:37:23 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/13 00:29:26 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/18 17:46:54 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	arg_sort(const char **drip, t_flags *flags, va_list args)
 		id_handle(args, flags);
 	if (**drip == 'c')
 		c_handle(args, flags);
+	if (**drip == 'u')
+		u_handle(args, flags);
 	if (**drip == 'X')
 		x_handle(args, flags);
 	if (**drip == 'x')

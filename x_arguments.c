@@ -6,13 +6,13 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:21:51 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/12 19:24:47 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/18 17:45:54 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pad_hex(int x, t_flags *flags, int len, int ul)
+void	pad_hex(unsigned int x, t_flags *flags, int len, int ul)
 {
 	if (flags->flag == 1 || flags->flag == 3)
 	{
@@ -43,7 +43,7 @@ void	pad_hex(int x, t_flags *flags, int len, int ul)
 		ft_puthex(x, len, flags, 1);
 }
 
-void	pad_hex_p(long x, t_flags *flags, int len, int ul)
+void	pad_hex_p(unsigned int x, t_flags *flags, int len, int ul)
 {
 	if (flags->pflag == 1)
 	{
@@ -57,7 +57,7 @@ void	pad_hex_p(long x, t_flags *flags, int len, int ul)
 	}
 }
 
-void	hex_precision(int x, int len, int ul, t_flags *flags)
+void	hex_precision(unsigned int x, int len, int ul, t_flags *flags)
 {
 	if (!flags->flag)
 		pad_hex_p(x, flags, len, ul);
@@ -88,7 +88,7 @@ void	x_handle(va_list args, t_flags *flags)
 	int x;
 	int len;
 
-	x = va_arg(args, int);
+	x = va_arg(args, unsigned int);
 	len = x_count(x);
 	if (flags->pflag == 2 && x == 0 && !flags->flag)
 		print_zero(flags);
@@ -114,7 +114,7 @@ void	x_handle_low(va_list args, t_flags *flags)
 	int x;
 	int len;
 
-	x = va_arg(args, int);
+	x = va_arg(args, unsigned int);
 	len = x_count(x);
 	if (flags->pflag == 2 && x == 0 && flags->width == 0)
 		print_zero(flags);
