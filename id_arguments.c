@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 13:36:41 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/18 16:18:41 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 19:38:53 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void	id_handle(va_list args, t_flags *flags)
 
 	id = va_arg(args, int);
 	len = ft_count(id);
-	/* printf("What the fuck |%d| |%d| |%d| |%d|", flags->flag, flags->pflag, flags->width, flags->precision); */
-	if (flags->pflag == 2 && id == 0/*  && flags->width == 0 */)
+	if (flags->pflag == 2 && id == 0)
 		print_zero(flags);
 	else if (flags->pflag == 1)
 	{
 		if (flags->precision < len && flags->flag)
 		{
-			/* flags->pflag = 0; */
 			if (flags->flag == 3)
 				flags->flag = 1;
 			(id >= 0) ? pad_spacezero(id, flags, len)

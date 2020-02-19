@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 19:45:27 by limartin       #+#    #+#                */
-/*   Updated: 2020/02/18 17:21:09 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 16:29:50 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1256,11 +1256,11 @@ int		main(void)
 	ft_printf(" (%d)\n", ft_printf("Ya basic: |%p|", val));
 
 
-	ft_printf(" (%d)\n", ft_printf("My compliments in hexadecimal: %X %X %X", 4011, 49374, 47806));	
+	ft_printf(" (%d)\n", ft_printf("My compliments in hexadecimal: %X %X %X", 4011, 49374, 47806));
 
 	printf("\n------------------------------------------------------------------------------------------------\n\n");
 
-	printf(" (%d)\n", printf("I LIKE BIG DIGITS AND I CANNOT LIE"));
+/* 	printf(" (%d)\n", printf("I LIKE BIG DIGITS AND I CANNOT LIE"));
 	ft_printf(" (%d)\n", ft_printf("I LIKE BIG DIGITS AND I CANNOT LIE"));
 	printf("\n");
 
@@ -1284,7 +1284,7 @@ int		main(void)
 	printf("\n");
 
 
-
+ */
 
 
 	

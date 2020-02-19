@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 18:36:43 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/18 17:46:24 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:03:03 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ void			c_handle(va_list args, t_flags *flags);
 void			pad_c(int c, t_flags *flags, int len);
 void			x_handle(va_list args, t_flags *flags);
 void			x_handle_low(va_list args, t_flags *flags);
-int				x_count(unsigned int x);
-void			ft_puthex(unsigned int x, int len, t_flags *flags, int ul);
+int				x_count(unsigned long x);
+void			ft_puthex(unsigned long x, int len, t_flags *flags, int ul);
 void			print_zero(t_flags *flags);
 void			pad_psz(int id, t_flags *flags, int len);
 void			u_handle(va_list args, t_flags *flags);
 void			id_precision(int id, int len, va_list args, t_flags *flags);
+void			p_handle(va_list args, t_flags *flags);
+void			s_handle(va_list args, t_flags *flags);
+void			ft_putstrp_fd(char *s, int fd, int len);
 
 #endif
 

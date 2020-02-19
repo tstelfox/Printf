@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/04 18:09:07 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/18 16:43:24 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 16:35:41 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int		ft_printf(const char *drip, ...)
 			drip++;
 			parser(&flags, &drip, args);
 		}
+		if (*drip == '\0')
+			break ;
 		ft_putchar_fd(*drip, 1);
 		flags.printed++;
 		drip++;

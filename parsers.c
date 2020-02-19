@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:37:23 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/18 17:46:54 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 18:49:48 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	parser(t_flags *flags, const char **drip, va_list args)
 	/* ft_putchar_fd(**drip, 1); */
 	if (ft_isalpha((int)**drip))
 		arg_sort(drip, flags, args);
-	(*drip)++;
 }
 
 void	arg_sort(const char **drip, t_flags *flags, va_list args)
@@ -107,4 +106,9 @@ void	arg_sort(const char **drip, t_flags *flags, va_list args)
 		x_handle(args, flags);
 	if (**drip == 'x')
 		x_handle_low(args, flags);
+	if (**drip == 'p')
+		p_handle(args, flags);
+	if (**drip == 's')
+		s_handle(args, flags);
+	(*drip)++;
 }

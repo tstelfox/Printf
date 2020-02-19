@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:43:18 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/13 00:16:49 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:11:14 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,35 @@ int		main(void)
 	int num1 = 0;
 	int num2 = 42;
 	char c = 'K';
+	char *str = "mumyer";
 	/* int *p = &num; */
 	/* int car= 'c'; */
 
 
-	ft_printf("I fucking hate this program |%-8.1d|\n", num2);
+	ft_printf("|%s|\n", str);
+	printf("|%s|\n", str);
+	ft_printf("|%.0s|\n", str);
+	printf("|%.0s|\n", str);
+	ft_printf("|%5.0s|\n", str);
+	printf("|%5.0s|\n", str);
+	ft_printf("|%50s|\n", str);
+	printf("|%50s|\n", str);
+	ft_printf("|%-50s|\n", str);
+	printf("|%-50s|\n", str);
+	ft_printf("|%10.5s|\n", str);
+	printf("|%10.5s|\n", str);
+	ft_printf("|%-10.5s|\n", str);
+	printf("|%-10.5s|\n", str);
+	ft_printf("|%.5s|\n", str);
+	printf("|%.5s|\n", str);
+	ft_printf("|%5.15s|\n", str);
+	printf("|%5.15s|\n", str);
+/* 	ft_printf("I fucking hate this program |%-8.1d|\n", num2);
 	printf("I fucking hate this program |%-8.1d|\n", num2);
 	printf(" (%d)\n", printf("08.*(-4): |%8.*i|", -4, 42));
 	ft_printf(" (%d)\n", ft_printf("08.*(-4): |%8.*i|", -4, 42));
 	printf(" (%d)\n", printf("08.*(-4): |%8.*i|", 4, 42));
-	ft_printf(" (%d)\n", ft_printf("08.*(-4): |%8.*i|", 4, 42));
+	ft_printf(" (%d)\n", ft_printf("08.*(-4): |%8.*i|", 4, 42)); */
 
 	/* ft_printf("I fucking hate this program |%2.2d|\n", num);
 	printf("I fucking hate this program |%2.2d|\n", num);

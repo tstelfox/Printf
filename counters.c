@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/29 18:15:43 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/18 18:43:18 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:00:24 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_putnbr2_fd(unsigned int n, int fd, t_flags *flags)
 		ft_putchar_fd(n + '0', fd);
 }
 
-int		x_count(unsigned int x)
+int		x_count(unsigned long x)
 {
 	int len;
 
@@ -101,11 +101,50 @@ int		x_count(unsigned int x)
 		x = x / 16;
 		len++;
 	}
-	/* printf("\n Jesus length here is |%d| PORCODDIO \n", len); */
 	return (len);
 }
 
-void	ft_puthex(unsigned int x, int len, t_flags *flags, int ul)
+void	ft_putstrp_fd(char *s, int fd, int len)
+{
+	if (!s)
+		return ;
+	write(fd, s, len);
+}
+
+void	ft_puthex(unsigned long x, int len, t_flags *flags, int ul)
+{
+	char				hex[len];
+	unsigned long		top;
+	int					i;
+
+	i = 0;
+	if (x == 0 && flags->pflag != 2)
+	{
+		ft_putchar_fd('0', 1);
+		return ;
+	}
+	while (x != 0)
+	{
+		top = x % 16;
+		if (top < 10)
+			top += 48;
+		else if (ul == 1)
+			top += 55;
+		else if (ul == 0)
+			top += 87;
+		hex[i] = top;
+		i++;
+		x /= 16;
+	}
+	i--;
+	while (i >= 0)
+	{
+		ft_putchar_fd(hex[i], 1);
+		i--;
+	}
+}
+
+/* void	ft_puthex(unsigned int x, int len, t_flags *flags, int ul)
 {
 	char	hex[len];
 	int		top;
@@ -136,3 +175,4 @@ void	ft_puthex(unsigned int x, int len, t_flags *flags, int ul)
 		i--;
 	}
 }
+ */
