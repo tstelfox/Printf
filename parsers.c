@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:37:23 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/19 18:49:48 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/20 20:07:44 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,59 +56,43 @@ void	prec_parser(t_flags *flags, const char **drip, va_list args)
 	}
 }
 
+void	parser2(t_flags *flags, const char **drip, va_list args)
+{
+	flags->flag = 1;
+	while (**drip == '-')
+	{
+		flags->flag = 2;
+		(*drip)++;
+	}
+	while (**drip == '0')
+	{
+		if (flags->flag != 2)
+			flags->flag = 3;
+		(*drip)++;
+	}
+	if (**drip == '*')
+	{
+		flags->width = va_arg(args, int);
+		if (flags->width < 0)
+		{
+			flags->flag = 2;
+			flags->width *= -1;
+		}
+		(*drip)++;
+	}
+	else
+		set_width(drip, flags);
+}
+
 void	parser(t_flags *flags, const char **drip, va_list args)
 {
 	if (**drip == '%')
-		ft_putchar_fd('%', 1);
+		ft_putcharcount_fd('%', 1, flags);
 	while ((**drip >= '0' && **drip <= '9') || **drip == '-' || **drip == '*')
-	{
-		flags->flag = 1;
-		while (**drip == '-')
-		{
-			flags->flag = 2;
-			(*drip)++;
-		}
-		while (**drip == '0')
-		{
-			if (flags->flag != 2)
-				flags->flag = 3;
-			(*drip)++;
-		}
-		if (**drip == '*')
-		{
-			flags->width = va_arg(args, int);
-			if (flags->width < 0)
-			{
-				flags->flag = 2;
-				flags->width *= -1;
-			}
-			(*drip)++;
-		}
-		else
-			set_width(drip, flags);
-	}
+		parser2(flags, drip, args);
 	if (**drip == '.')
 		prec_parser(flags, drip, args);
-	/* ft_putchar_fd(**drip, 1); */
 	if (ft_isalpha((int)**drip))
 		arg_sort(drip, flags, args);
-}
-
-void	arg_sort(const char **drip, t_flags *flags, va_list args)
-{
-	if (**drip == 'd' || **drip == 'i')
-		id_handle(args, flags);
-	if (**drip == 'c')
-		c_handle(args, flags);
-	if (**drip == 'u')
-		u_handle(args, flags);
-	if (**drip == 'X')
-		x_handle(args, flags);
-	if (**drip == 'x')
-		x_handle_low(args, flags);
-	if (**drip == 'p')
-		p_handle(args, flags);
-	if (**drip == 's')
-		s_handle(args, flags);
 	(*drip)++;
 }

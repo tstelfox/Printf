@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/04 18:09:07 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/19 16:35:41 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/20 20:07:50 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,55 +21,22 @@ void	flags_to_zero(t_flags *flags)
 	flags->pflag = 0;
 }
 
-void	pad_precision(long id, t_flags *flags, int len)
+void	arg_sort(const char **drip, t_flags *flags, va_list args)
 {
-	if (flags->pflag == 1)
-	{
-		if (id < 0)
-		{
-			ft_putchar_fd('-', 1);
-			id *= -1;
-			flags->precision++;
-			flags->printed++;
-		}
-		while (flags->precision > len)
-		{
-			ft_putchar_fd('0', 1);
-			flags->precision--;
-			flags->printed++;
-		}
-		ft_putnbr1_fd(id, 1, flags);
-	}
-}
-
-void	pad_negative(long id, t_flags *flags, int len)
-{
-	if (flags->flag == 1 || flags->flag == 3)
-	{
-		if (flags->flag == 3)
-		{
-			ft_putchar_fd('-', 1);
-			id *= -1;
-			flags->printed++;
-		}
-		while (flags->width > len)
-		{
-			flags->flag == 1 ? ft_putchar_fd(' ', 1) : ft_putchar_fd('0', 1);
-			flags->width--;
-			flags->printed++;
-		}
-		ft_putnbr_fd(id, 1);
-	}
-	if (flags->flag == 2)
-	{
-		ft_putnbr_fd(id, 1);
-		while (flags->width - len > 0)
-		{
-			ft_putchar_fd(' ', 1);
-			flags->width--;
-			flags->printed++;
-		}
-	}
+	if (**drip == 'd' || **drip == 'i')
+		id_handle(args, flags);
+	if (**drip == 'c')
+		c_handle(args, flags);
+	if (**drip == 'u')
+		u_handle(args, flags);
+	if (**drip == 'X')
+		x_handle(args, flags);
+	if (**drip == 'x')
+		x_handle_low(args, flags);
+	if (**drip == 'p')
+		p_handle(args, flags);
+	if (**drip == 's')
+		s_handle(args, flags);
 }
 
 void	pad_spacezero(int id, t_flags *flags, int len)
@@ -79,53 +46,43 @@ void	pad_spacezero(int id, t_flags *flags, int len)
 		while (flags->width > len)
 		{
 			if (flags->flag == 1)
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 			else if (flags->flag == 3)
-				ft_putchar_fd('0', 1);
-			flags->printed++;
+				ft_putcharcount_fd('0', 1, flags);
 			flags->width--;
 		}
-		/* if (flags->pflag != 1)
-			 */ft_putnbr1_fd(id, 1, flags);
+		ft_putnbr1_fd(id, 1, flags);
 	}
 	if (flags->flag == 2)
 	{
-		/* if (flags->pflag != 1)
-			 */ft_putnbr_fd(id, 1);
+		ft_putnbrcount_fd(id, 1, flags);
 		while (flags->width - len > 0)
 		{
-			ft_putchar_fd(' ', 1);
+			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
-			flags->printed++;
 		}
 	}
 }
 
-void	pad_psz(int id, t_flags *flags, int len)
+void	pad_psz(t_flags *flags, int len)
 {
 	if (flags->flag == 1 || flags->flag == 3)
 	{
 		while (flags->width > len)
 		{
 			if (flags->flag == 1)
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 			else if (flags->flag == 3)
-				ft_putchar_fd('0', 1);
-			flags->printed++;
+				ft_putcharcount_fd('0', 1, flags);
 			flags->width--;
 		}
-		/* if (flags->pflag != 1)
-			ft_putnbr1_fd(id, 1, flags); */
 	}
 	if (flags->flag == 2)
 	{
-		/* if (flags->pflag != 1)
-			ft_putnbr_fd(id, 1); */
 		while (flags->width - len > 0)
 		{
-			ft_putchar_fd(' ', 1);
+			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
-			flags->printed++;
 		}
 	}
 }
@@ -142,7 +99,7 @@ int		ft_printf(const char *drip, ...)
 	while (*drip != '\0')
 	{
 		flags_to_zero(&flags);
-		if (*drip == '%')
+		while (*drip == '%')
 		{
 			drip++;
 			parser(&flags, &drip, args);

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 18:49:57 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/19 23:01:20 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/20 15:33:57 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	pad_string(char *str, t_flags *flags, int len)
 		{
 			while (flags->width > len)
 			{
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 				flags->width--;
 			}
-			ft_putstr_fd(str, 1);
+			ft_putstrp_fd(str, 1, len, flags);
 		}
 		if (flags->flag == 2)
 		{
-			ft_putstr_fd(str, 1);
+			ft_putstrp_fd(str, 1, len, flags);
 			while (flags->width > len)
 			{
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 				flags->width--;
 			}
 		}
@@ -43,17 +43,17 @@ void	s_prew(char *str, t_flags *flags, int len)
 	{
 		while (flags->width > len)
 		{
-			ft_putchar_fd(' ', 1);
+			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
 		}
-		ft_putstrp_fd(str, 1, flags->precision);
+		ft_putstrp_fd(str, 1, len, flags);
 	}
 	if (flags->flag == 2)
 	{
-		ft_putstrp_fd(str, 1, flags->precision);
+		ft_putstrp_fd(str, 1, len, flags);
 		while (flags->width > len)
 		{
-			ft_putchar_fd(' ', 1);
+			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
 		}
 	}
@@ -66,9 +66,9 @@ void	s_precision(char *str, t_flags *flags, int len)
 	else
 	{
 		if (flags->precision < len)
-			ft_putstrp_fd(str, 1, flags->precision);
+			ft_putstrp_fd(str, 1, flags->precision, flags);
 		else
-			ft_putstr_fd(str, 1);
+			ft_putstrp_fd(str, 1, len, flags);
 	}
 }
 
@@ -82,35 +82,22 @@ void	s_prewidth(char *str, t_flags *flags, int len)
 		{
 			while (flags->width > flags->precision)
 			{
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 				flags->width--;
 			}
-			ft_putstrp_fd(str, 1, flags->precision);
+			ft_putstrp_fd(str, 1, flags->precision, flags);
 		}
 		if (flags->flag == 2)
 		{
-			ft_putstrp_fd(str, 1, flags->precision);
+			ft_putstrp_fd(str, 1, flags->precision, flags);
 			while (flags->width > flags->precision)
 			{
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 				flags->width--;
 			}
 		}
 	}
 }
-
-/* void	zero_str(char *str, t_flags *flags)
-{
-	if (!flags->pflag)
-	{
-		if (flags->width > 6)
-
-		ft_putstr_fd("(null)", 1);
-		return ;
-	}
-	if (flags->precision > 0)
-		ft_putstrp_fd(str, 1, flags->precision);
-} */
 
 void	s_handle(va_list args, t_flags *flags)
 {
@@ -121,7 +108,7 @@ void	s_handle(va_list args, t_flags *flags)
 	if (str != NULL)
 		len = ft_strlen(str);
 	else
-	{ //This is tomorrow's problem.
+	{
 		len = 6;
 		str = "(null)";
 	}
@@ -131,11 +118,11 @@ void	s_handle(va_list args, t_flags *flags)
 		pad_string(str, flags, len);
 	else if (flags->pflag == 1)
 	{
-		if (flags->flag/*  && flags->width > flags->precisio */)
+		if (flags->flag)
 			s_prewidth(str, flags, len);
 		else
 			s_precision(str, flags, len);
 	}
 	else
-		ft_putstr_fd(str, 1);
+		ft_putstrp_fd(str, 1, len, flags);
 }

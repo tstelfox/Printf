@@ -6,38 +6,11 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:21:51 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/19 17:36:04 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/20 19:55:49 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	pad_hexsz(unsigned int x, t_flags *flags, int len, int ul)
-{
-	if (flags->flag == 1 || flags->flag == 3)
-	{
-		while (flags->width > len)
-		{
-			if (flags->flag == 1)
-				ft_putchar_fd(' ', 1);
-			else if (flags->flag == 3)
-				ft_putchar_fd('0', 1);
-			flags->printed++;
-			flags->width--;
-		}
-	}
-	else if (flags->flag == 2)
-	{
-		while (flags->width - len > 0)
-		{
-			ft_putchar_fd(' ', 1);
-			flags->width--;
-			flags->printed++;
-		}
-	}
-	else
-		ft_puthex(x, len, flags, ul);
-}
 
 void	pad_hex(unsigned int x, t_flags *flags, int len, int ul)
 {
@@ -46,28 +19,24 @@ void	pad_hex(unsigned int x, t_flags *flags, int len, int ul)
 		while (flags->width > len)
 		{
 			if (flags->flag == 1)
-				ft_putchar_fd(' ', 1);
+				ft_putcharcount_fd(' ', 1, flags);
 			else if (flags->flag == 3)
-				ft_putchar_fd('0', 1);
-			flags->printed++;
+				ft_putcharcount_fd('0', 1, flags);
 			flags->width--;
 		}
-		/* if (flags->pflag != 1)
-			 */ft_puthex(x, len, flags, ul);
+		ft_puthexi(x, len, flags, ul);
 	}
 	else if (flags->flag == 2)
 	{
-		/* if (flags->pflag != 1)
-			 */ft_puthex(x, len, flags, ul);
+		ft_puthexi(x, len, flags, ul);
 		while (flags->width - len > 0)
 		{
-			ft_putchar_fd(' ', 1);
+			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
-			flags->printed++;
 		}
 	}
 	else
-		ft_puthex(x, len, flags, ul);
+		ft_puthexi(x, len, flags, ul);
 }
 
 void	pad_hex_p(unsigned int x, t_flags *flags, int len, int ul)
@@ -76,11 +45,10 @@ void	pad_hex_p(unsigned int x, t_flags *flags, int len, int ul)
 	{
 		while (flags->precision > len)
 		{
-			ft_putchar_fd('0', 1);
+			ft_putcharcount_fd('0', 1, flags);
 			flags->precision--;
-			flags->printed++;
 		}
-		ft_puthex(x, len, flags, ul);
+		ft_puthexi(x, len, flags, ul);
 	}
 }
 
@@ -133,7 +101,7 @@ void	x_handle(va_list args, t_flags *flags)
 	else if (flags->pflag != 1 && flags->flag)
 		pad_hex(x, flags, len, 1);
 	else
-		ft_puthex(x, len, flags, 1);
+		ft_puthexi(x, len, flags, 1);
 }
 
 void	x_handle_low(va_list args, t_flags *flags)

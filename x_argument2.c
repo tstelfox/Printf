@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   c_arguments.c                                      :+:    :+:            */
+/*   x_argument2.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/11 20:15:20 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 15:34:57 by tmullan       ########   odam.nl         */
+/*   Created: 2020/02/20 19:54:28 by tmullan        #+#    #+#                */
+/*   Updated: 2020/02/20 19:54:57 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	c_handle(va_list args, t_flags *flags)
-{
-	int c;
-	int len;
-
-	c = va_arg(args, int);
-	len = 1;
-	if (flags->flag)
-		pad_c(c, flags, len);
-	else
-		ft_putcharcount_fd(c, 1, flags);
-}
-
-void	pad_c(int c, t_flags *flags, int len)
+void	pad_hexsz(unsigned int x, t_flags *flags, int len, int ul)
 {
 	if (flags->flag == 1 || flags->flag == 3)
 	{
-		if (flags->pflag && flags->flag == 3)
-			flags->flag = 1;
 		while (flags->width > len)
 		{
 			if (flags->flag == 1)
@@ -39,15 +24,15 @@ void	pad_c(int c, t_flags *flags, int len)
 				ft_putcharcount_fd('0', 1, flags);
 			flags->width--;
 		}
-		ft_putcharcount_fd(c, 1, flags);
 	}
-	if (flags->flag == 2)
+	else if (flags->flag == 2)
 	{
-		ft_putcharcount_fd(c, 1, flags);
 		while (flags->width - len > 0)
 		{
 			ft_putcharcount_fd(' ', 1, flags);
 			flags->width--;
 		}
 	}
+	else
+		ft_puthexi(x, len, flags, ul);
 }
