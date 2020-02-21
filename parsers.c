@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:37:23 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 20:07:44 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 20:29:51 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,27 @@ void	set_precision(const char **drip, t_flags *flags)
 		(*drip)++;
 }
 
+void	prec_parser2(t_flags *flags, const char **drip, va_list args)
+{
+	flags->precision = va_arg(args, int);
+	if (flags->precision < 0)
+		flags->pflag = 0;
+	if (flags->flag == 3 && flags->pflag)
+	{
+		flags->flag = 1;
+		flags->cflag = 1;
+	}
+	else if (flags->precision == 0)
+		flags->pflag = 2;
+	(*drip)++;
+}
+
 void	prec_parser(t_flags *flags, const char **drip, va_list args)
 {
 	flags->pflag = 1;
 	(*drip)++;
 	if (**drip == '*')
-	{
-		flags->precision = va_arg(args, int);
-		if (flags->precision < 0)
-			flags->pflag = 0;
-		if (flags->flag == 3 && flags->pflag)
-			flags->flag = 1;
-		else if (flags->precision == 0)
-			flags->pflag = 2;
-		(*drip)++;
-	}
+		prec_parser2(flags, drip, args);
 	else if (!ft_isdigit(**drip))
 	{
 		flags->precision = 0;
@@ -52,7 +58,10 @@ void	prec_parser(t_flags *flags, const char **drip, va_list args)
 	{
 		set_precision(drip, flags);
 		if (flags->flag == 3)
+		{
 			flags->flag = 1;
+			flags->cflag = 1;
+		}
 	}
 }
 
@@ -86,13 +95,11 @@ void	parser2(t_flags *flags, const char **drip, va_list args)
 
 void	parser(t_flags *flags, const char **drip, va_list args)
 {
-	if (**drip == '%')
-		ft_putcharcount_fd('%', 1, flags);
 	while ((**drip >= '0' && **drip <= '9') || **drip == '-' || **drip == '*')
 		parser2(flags, drip, args);
 	if (**drip == '.')
 		prec_parser(flags, drip, args);
-	if (ft_isalpha((int)**drip))
+	if (ft_isalpha((int)**drip) || **drip == '%')
 		arg_sort(drip, flags, args);
 	(*drip)++;
 }

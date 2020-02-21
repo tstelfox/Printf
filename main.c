@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:43:18 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/19 21:11:14 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 18:35:55 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,26 @@ int		main(void)
 	int num2 = 42;
 	char c = 'K';
 	char *str = "mumyer";
+	void	*val = NULL;
 	/* int *p = &num; */
 	/* int car= 'c'; */
 
+/* 	printf(" (%d)\n", printf("Sometimes it struggles with negative ints: 8.7i |%8.7p|", val));
+	ft_printf(" (%d)\n", ft_printf("Sometimes it struggles with negative ints: 8.7i |%8.7p|", val));
+	printf(" (%d)\n", printf("-2.2: |%-2.2p|", 5));
+	ft_printf(" (%d)\n", ft_printf("-2.2: |%-2.2p|", 5));
+	printf(" (%d)\n", printf("-0.2: |%-0.2p|", 5));
+	ft_printf(" (%d)\n", ft_printf("-0.2: |%-0.2p|", 5));
+	printf(" (%d)\n", printf("(0) -0.2: |%-0.2p|", 0));
+	ft_printf(" (%d)\n", ft_printf("(0) -0.2: |%-0.2p|", 0));
+	printf(" (%d)\n", printf("(0) -2.2: |%-2.2p|", 0));
+	ft_printf(" (%d)\n", ft_printf("(0) -2.2: |%-2.2p|", 0)); */
 
-	ft_printf("|%s|\n", str);
+	printf("(%d)", printf("OG mudafucka %%-11.2X |%-11.2X|\n", -1345822500));
+	printf("(%d)", ft_printf("MY mudafucka %%-11.2X |%-11.2X|\n", -1345822500));
+	/* printf("(%d)", printf("OG mudafucka %%-11.2X |%X|\n", -1345822500));
+	printf("(%d)", ft_printf("OG mudafucka %%-11.2X |%X|\n", -1345822500)); */
+/* 	ft_printf("|%s|\n", str);
 	printf("|%s|\n", str);
 	ft_printf("|%.0s|\n", str);
 	printf("|%.0s|\n", str);
@@ -42,7 +57,7 @@ int		main(void)
 	ft_printf("|%.5s|\n", str);
 	printf("|%.5s|\n", str);
 	ft_printf("|%5.15s|\n", str);
-	printf("|%5.15s|\n", str);
+	printf("|%5.15s|\n", str); */
 /* 	ft_printf("I fucking hate this program |%-8.1d|\n", num2);
 	printf("I fucking hate this program |%-8.1d|\n", num2);
 	printf(" (%d)\n", printf("08.*(-4): |%8.*i|", -4, 42));

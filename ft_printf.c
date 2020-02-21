@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/04 18:09:07 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 20:07:50 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 20:46:49 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	flags_to_zero(t_flags *flags)
 	flags->arglen = 0;
 	flags->flag = 0;
 	flags->pflag = 0;
+	flags->cflag = 0;
 }
 
 void	arg_sort(const char **drip, t_flags *flags, va_list args)
@@ -37,6 +38,8 @@ void	arg_sort(const char **drip, t_flags *flags, va_list args)
 		p_handle(args, flags);
 	if (**drip == 's')
 		s_handle(args, flags);
+	if (**drip == '%')
+		pct_handle(flags);
 }
 
 void	pad_spacezero(int id, t_flags *flags, int len)

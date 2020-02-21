@@ -6,15 +6,16 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/16 14:03:31 by tmullan        #+#    #+#                 #
-#    Updated: 2020/02/20 20:41:15 by tmullan       ########   odam.nl          #
+#    Updated: 2020/02/21 20:44:33 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf
+NAME = libftprintf.a
 
 OBJ = ft_printf.o counters.o parsers.o id_arguments.o \
 		c_arguments.o x_arguments.o u_arguments.o p_arguments.o \
-		s_arguments.o printers.o p_argument2.o printer2.o x_argument2.o
+		s_arguments.o printers.o p_argument2.o printer2.o x_argument2.o \
+		pct_argument.o
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -26,7 +27,8 @@ complib:
 	cd $(LIB) && $(MAKE)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ $(FLAGS) -L $(LIB) -lft $(FLAGS)
+	ar rc $@ $^ $(LIB)/*.o
+	ranlib $(NAME)
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(FLAGS)

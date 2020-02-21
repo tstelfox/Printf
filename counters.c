@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/29 18:15:43 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 19:53:45 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 18:43:36 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,22 @@ int		ft_ucount(unsigned int n)
 	}
 }
 
-int		x_count(unsigned long x)
+int		x_count(unsigned int x)
+{
+	int len;
+
+	len = 0;
+	if (x == 0)
+		return (1);
+	while (x != 0)
+	{
+		x = x / 16;
+		len++;
+	}
+	return (len);
+}
+
+int		xp_count(unsigned long x)
 {
 	int len;
 

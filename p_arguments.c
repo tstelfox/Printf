@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 16:39:12 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 19:43:38 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 18:44:07 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	p_handle(va_list args, t_flags *flags)
 	int				len;
 
 	x = va_arg(args, unsigned long);
-	len = (x_count(x) + 2);
+	len = (xp_count(x) + 2);
 	if (flags->pflag == 2 && x == 0)
 		print_pzero(flags);
 	else if (flags->pflag == 1 || (flags->pflag == 2 && x == 0))

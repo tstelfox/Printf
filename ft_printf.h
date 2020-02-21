@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 18:36:43 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/20 20:42:07 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/21 20:44:52 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef	struct	s_flags
 	int	arglen;
 	int	flag;
 	int	pflag;
+	int	cflag;
 }				t_flags;
 
 int				ft_printf(const char *drip, ...);
@@ -42,7 +43,8 @@ void			c_handle(va_list args, t_flags *flags);
 void			pad_c(int c, t_flags *flags, int len);
 void			x_handle(va_list args, t_flags *flags);
 void			x_handle_low(va_list args, t_flags *flags);
-int				x_count(unsigned long x);
+int				x_count(unsigned int x);
+int				xp_count(unsigned long x);
 void			ft_puthex(unsigned long x, int len, t_flags *flags, int ul);
 void			ft_puthexi(unsigned int x, int len, t_flags *flags, int ul);
 void			print_zero(t_flags *flags);
@@ -56,5 +58,6 @@ void			ft_putcharcount_fd(char c, int fd, t_flags *flags);
 void			ft_putnbrcount_fd(int n, int fd, t_flags *flags);
 void			pad_point(unsigned long x, t_flags *flags, int len, int ul);
 void			pad_hexsz(unsigned int x, t_flags *flags, int len, int ul);
+void			pct_handle(t_flags *flags);
 
 #endif
