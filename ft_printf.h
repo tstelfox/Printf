@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 18:36:43 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/21 20:44:52 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/25 16:45:43 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				ft_printf(const char *drip, ...);
 int				ft_count(int n);
 int				ft_ucount(unsigned int n);
 void			parser(t_flags *flags, const char **drip, va_list args);
+void			parser2(t_flags *flags, const char **drip, va_list args);
 void			prec_parser(t_flags *flags, const char **drip, va_list args);
 void			arg_sort(const char **drip, t_flags *flags, va_list args);
 void			id_handle(va_list args, t_flags *flags);

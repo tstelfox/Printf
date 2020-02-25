@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 16:37:23 by tmullan        #+#    #+#                */
-/*   Updated: 2020/02/21 20:29:51 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/02/25 16:45:05 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	prec_parser2(t_flags *flags, const char **drip, va_list args)
 		flags->flag = 1;
 		flags->cflag = 1;
 	}
-	else if (flags->precision == 0)
+	if (flags->precision == 0)
 		flags->pflag = 2;
 	(*drip)++;
 }
@@ -89,17 +89,6 @@ void	parser2(t_flags *flags, const char **drip, va_list args)
 		}
 		(*drip)++;
 	}
-	else
+	else if (ft_isdigit((int)**drip))
 		set_width(drip, flags);
-}
-
-void	parser(t_flags *flags, const char **drip, va_list args)
-{
-	while ((**drip >= '0' && **drip <= '9') || **drip == '-' || **drip == '*')
-		parser2(flags, drip, args);
-	if (**drip == '.')
-		prec_parser(flags, drip, args);
-	if (ft_isalpha((int)**drip) || **drip == '%')
-		arg_sort(drip, flags, args);
-	(*drip)++;
 }
